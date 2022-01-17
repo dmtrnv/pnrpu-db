@@ -1,0 +1,25 @@
+﻿@using DbLab3.Misc
+@model DbLab3.Pages.Index
+
+@if (Model.Employees.Count != 0)
+{
+<table class="flex-item">
+    <thead>
+    @foreach (var propName in Model.NotNullPropertiesNames)
+    {
+        <th>@propName</th>
+    }
+    </thead>
+    <tbody>
+    @foreach (var employee in Model.Employees)
+    {
+        <tr>
+            @foreach (var propName in Model.NotNullPropertiesNames)
+            {
+                <td>@employee.GetPropertyValueToString(propName)</td>
+            }
+        </tr>
+    }
+    </tbody>
+</table>
+}

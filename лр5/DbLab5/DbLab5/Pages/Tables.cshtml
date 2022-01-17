@@ -1,0 +1,24 @@
+﻿@page
+@model DbLab5.Pages.Tables
+@* Отображаются все доступные таблицы; имеется кнопка создать таблицу *@
+@{
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <title>Таблицы</title>
+</head>
+<body>
+<div class="tableNames">
+    @foreach (var name in Model.TableNames)
+    {
+        <a asp-area="" asp-page="/TableStructure" asp-route-tableName="@name">@name</a> <br/>
+    }
+</div>
+<div>
+    <a asp-area="" asp-page="/CreateTable">Создать таблицу</a>
+</div>
+</body>
+</html>

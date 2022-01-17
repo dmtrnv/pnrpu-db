@@ -1,0 +1,39 @@
+﻿@page
+@using DbLab5.Misc
+@using DbLab5.Data
+@model DbLab5.Pages.TableStructure
+@* вывод структуры таблицы *@
+@{
+    Layout = "_TableLayout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Структура таблицы @Model.Context.WorkingTableName</title>
+</head>
+<body>
+<div>
+    <table class="table-bordered">
+        <thead>
+        @foreach (var prop in typeof(FieldModel).GetProperties())
+        {
+            <th>@prop.Name</th>
+        }
+        </thead>
+        <tbody>
+        @foreach (var field in Model.Fields)
+        {
+            <tr>
+            @foreach (var propName in Model.GetPropertiesNames(field))
+            {
+                <td>@field.GetPropertyValue(propName)</td>
+            }
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+﻿@page
+@using DbLab5.Data
+@using DbLab5.Misc
+@model DbLab5.Pages.Triggers
+@* просмотр существующих триггеров, создание нового *@
+@{
+    Layout = "Shared/_Layout";
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <title>Триггеры</title>
+</head>
+<body>
+<div>
+    <p>Удалить триггер</p> <br/>
+    <form method="post" class="form-group">
+        <label for="trig">Название</label>
+        <input type="text" asp-for="Trigger.Name" id="trig" class="form-control w-25"/>
+        <input type="submit" asp-page-handler="RemoveTrigger" value="Удалить"/>
+    </form>
+    <hr/><br/>
+    
+    <p>Доступные триггеры</p><br/>
+    <table class="table-bordered">
+        <thead>
+        @foreach (var prop in typeof(TriggerModel).GetProperties())
+        {
+            <th>@prop.Name</th>
+        }
+        </thead>
+        <tbody>
+        @foreach (var trigger in Model.TriggerModels)
+        {
+            <tr>
+                @foreach (var prop in typeof(TriggerModel).GetProperties())
+                {
+                    <td>@trigger.GetPropertyValue(prop.Name)</td>
+                }
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+﻿@page
+@model DbLab3.Pages.Index
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="~/css/site.css"/>
+    <title>SQL SELECT</title>
+</head>
+<body>
+<div class="flex-container center">
+    <div class="flex-sub-container flex-item">
+        <button class="flex-item" value="SelectAll">SELECT * FROM Employees</button>
+        <button class="flex-item" value="SelectNameTown">SELECT FullName, Town FROM Employees ORDER BY Town</button>
+        <button class="flex-item" value="SelectNameExperience">SELECT FullName, WorkExperience FROM Employees WHERE WorkExperience > 4</button>
+    </div>
+    <div class="flex-sub-container flex-item" id="query-result"></div>
+    <script>
+        let buttons = document.getElementsByTagName('button');
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener('click', () => {
+                fetch('/Index?handler=QueryResultPartial&commandName=' + buttons[i].getAttribute('value'))
+                    .then((response) => {
+                        return response.text();
+                    })
+                    .then((result) => {
+                        document.getElementById('query-result').innerHTML = result;
+                    });
+            });
+        }
+    </script>
+</div>
+</body>
+</html>

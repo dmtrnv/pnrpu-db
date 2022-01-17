@@ -1,0 +1,85 @@
+﻿@using DbLab4.Misc
+@using DbLab4.Models
+@model DbLab4.Pages.Index
+
+@if (Model.ProductsTableExists)
+{
+    @if (Model.Products.Count != 0)
+    {
+    <p>Products</p>
+    <table class="flex-item">
+        <thead>
+        @foreach (var propName in Model.NotNullProductPropertiesNames)
+        {
+            <th>@propName</th>
+        }
+        </thead>
+        <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+            @foreach (var propName in Model.NotNullProductPropertiesNames)
+            {
+                <td>@product.GetPropertyValueToString(propName)</td>
+            }
+            </tr>
+        }
+        </tbody>
+    </table>
+    }
+    else
+    {
+    <p>Products</p>
+    <table class="flex-item">
+        <thead>
+        @foreach (var prop in typeof(Product).GetProperties())
+        {
+            <th>@prop.Name</th>
+        }
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    }
+}
+
+@if (Model.ManufacturerTableExists)
+{
+    @if (Model.Manufacturers.Count != 0)
+    {
+    <p>Manufacturers</p>
+    <table class="flex-item">
+        <thead>
+        @foreach (var propName in Model.NotNullManufacturerPropertiesNames)
+        {
+            <th>@propName</th>
+        }
+        </thead>
+        <tbody>
+        @foreach (var manufacturer in Model.Manufacturers)
+        {
+            <tr>
+            @foreach (var propName in Model.NotNullManufacturerPropertiesNames)
+            {
+                <td>@manufacturer.GetPropertyValueToString(propName)</td>
+            }
+            </tr>
+        }
+        </tbody>
+    </table>
+    }
+    else
+    {
+    <p>Manufacturers</p>
+    <table class="flex-item">
+        <thead>
+        @foreach (var prop in typeof(Manufacturer).GetProperties())
+        {
+            <th>@prop.Name</th>
+        }
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    }
+}

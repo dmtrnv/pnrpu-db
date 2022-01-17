@@ -1,0 +1,25 @@
+﻿@page
+@model DbLab5.Pages.Operations
+@* переименовать таблицу, очистить таблицу, удалить таблицу *@
+@{
+    Layout = "_TableLayout";
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <title>Операции с таблицой</title>
+</head>
+<body>
+<div>
+    <form method="post" class="form-group">
+        <label for="newName">Новое имя</label>
+        <input type="text" asp-for="NewName" id="newName" class="form-control w-25"/>
+        <input type="submit" asp-page-handler="RenameTable" value="Переименовать" />
+        <br/><br/>
+        <input type="submit" asp-page-handler="RemoveTable" value="Удалить таблицу" />
+    </form>
+</div>
+</body>
+</html>

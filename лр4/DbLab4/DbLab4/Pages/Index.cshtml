@@ -1,0 +1,64 @@
+﻿@page
+@using DbLab4.Misc
+@model DbLab4.Pages.Index
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <title>SQL DDL & DML</title>
+</head>
+<body>
+<div class="flex-container">
+    <div class="flex-sub-container flex-item">
+        <button class="flex-item" value="CreateManufacturers">@SqlCommands.CommandsNonQuery["CreateManufacturers"]</button>
+        <button class="flex-item" value="CreateProducts">@SqlCommands.CommandsNonQuery["CreateProducts"]</button>
+        <button class="flex-item" value="AlterProductAddFK">@SqlCommands.CommandsNonQuery["AlterProductAddFK"]</button>
+        <button class="flex-item" value="InsertIntoManufacturers">@SqlCommands.CommandsNonQuery["InsertIntoManufacturers"]</button>
+        <button class="flex-item" value="InsertIntoProducts">@SqlCommands.CommandsNonQuery["InsertIntoProducts"]</button>
+        <button class="flex-item" value="UpdateProduct">@SqlCommands.CommandsNonQuery["UpdateProduct"]</button>
+        <button class="flex-item" value="DeleteProduct">@SqlCommands.CommandsNonQuery["DeleteProduct"]</button>
+        <button class="flex-item" value="SelectProductsInnerJoinManufacturers" id="inner">@SqlCommands.CommandsReader["SelectProductsInnerJoinManufacturers"]</button>
+        <button class="flex-item" value="TruncateProducts">@SqlCommands.CommandsNonQuery["TruncateProducts"]</button>
+        <button class="flex-item" value="DropProducts">@SqlCommands.CommandsNonQuery["DropProducts"]</button>
+        <button class="flex-item" value="TruncateManufacturers">@SqlCommands.CommandsNonQuery["TruncateManufacturers"]</button>
+        <button class="flex-item" value="DropManufacturers">@SqlCommands.CommandsNonQuery["DropManufacturers"]</button>
+    </div>
+    <div class="flex-sub-container flex-item" id="inner-join-result"></div>
+    <div class="flex-sub-container flex-item" id="query-result"></div>
+    <script>     
+        let buttons = document.getElementsByTagName('button');
+        for (let i = 0; i < buttons.length; i++) {
+            if (buttons[i].getAttribute('value') === 'SelectProductsInnerJoinManufacturers') continue;
+            buttons[i].addEventListener('click', () => {
+                fetch('/Index?handler=CommandExecute&commandName=' + buttons[i].getAttribute('value'))
+                    .then(() => {
+                        fetch('/Index?handler=QueryResultPartial')
+                            .then((response) => {
+                                return response.text();
+                            })
+                            .then((result) => {
+                                document.getElementById('query-result').innerHTML = result;
+                                document.getElementById('inner-join-result').style.display = 'none';
+                            });
+                    });
+            });
+        }
+        
+        let b = document.getElementById('inner');
+        b.addEventListener('click', () => {
+            fetch('/Index?handler=SelectInnerJoin&commandName=' + b.getAttribute('value'))
+                .then((response) => {
+                    return response.text();
+                })
+                .then((result) => {
+                    document.getElementById('inner-join-result').innerHTML = result;
+                    document.getElementById('inner-join-result').style.display = 'block';
+                });
+        }); 
+    </script>
+</div>
+</body>
+</html>

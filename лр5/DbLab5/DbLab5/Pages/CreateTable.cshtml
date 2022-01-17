@@ -1,0 +1,69 @@
+﻿@page
+@using Org.BouncyCastle.Utilities.Collections
+@using DbLab5.Data
+@model DbLab5.Pages.CreateTable
+@* Создание новой таблицы *@
+@{
+    Layout = "Shared/_Layout";
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <title>Создание таблицы</title>
+</head>
+<body>
+<div>
+    @if (Model.RowsCount == 0)
+    {
+        <form method="post" class="form-group">
+            <label for="rowsCount">Количество полей</label>
+            <input type="number" asp-for="RowsCount" id="rowsCount" class="form-control w-25"/>
+            <button type="submit" >Создать</button>
+        </form>
+    }
+    else
+    {
+        Model.Rows = new List<CreateTableRowModel>(Model.RowsCount);
+        
+        @using (Html.BeginForm(FormMethod.Post, new { @class = "form-group" }))
+        {
+            @Html.LabelFor(m => m.TableName) <br />
+            @Html.EditorFor(m => m.TableName, new { htmlAttribute = new { @class = "form-control"}})
+            <br/>
+            <hr />
+            
+            <div id="fields">
+                @for (var i = 0; i < Model.RowsCount; i++)
+                {
+                    Model.Rows.Add(new CreateTableRowModel());
+                    <br />
+                    <hr />
+                    <div id="field">
+                    @Html.LabelFor(m => m.Rows[i].Name) <br />
+                    @Html.EditorFor(m => m.Rows[i].Name, new { htmlAttribute = new { @class = "form-control"}}) <br />
+                    
+                    @Html.LabelFor(m => m.Rows[i].Type) <br />
+                    @Html.EditorFor(m => m.Rows[i].Type, new { htmlAttribute = new { @class = "form-control"}}) <br />
+                    
+                    @Html.LabelFor(m => m.Rows[i].NotNull)
+                    @Html.EditorFor(m => m.Rows[i].NotNull, new { htmlAttribute = new { @class = "form-control"}}) <br />
+                    
+                    @Html.LabelFor(m => m.Rows[i].AutoIncrement)
+                    @Html.EditorFor(m => m.Rows[i].AutoIncrement, new { htmlAttribute = new { @class = "form-control"}}) <br />
+                    
+                    @Html.LabelFor(m => m.Rows[i].PrimaryKey)
+                    @Html.EditorFor(m => m.Rows[i].PrimaryKey, new { htmlAttribute = new { @class = "form-control"}}) <br />
+                    <hr/>
+                    <br/>
+                    </div>
+                }
+            </div>
+        
+            <button type="submit">Создать</button>
+        }
+    } 
+</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+﻿@page
+@model DbLab5.Pages.Views
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <title>Представления</title>
+</head>
+<body>
+<div>
+    <table class="table-bordered">
+        <thead>
+        @foreach (var header in Model.SelectResult.Headers)
+        {
+            <th>@header</th>
+        }
+        </thead>
+        <tbody>
+        @foreach (var row in Model.SelectResult.Values)
+        {
+            <tr> 
+                @foreach (var value in row)
+                {
+                    <td>@value</td>
+                }
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
