@@ -1,0 +1,44 @@
+﻿@page
+@model BoatStation.Pages.Reception.ActiveContracts
+
+@{
+    Layout = "Shared/_Layout";
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <title>Выданные палв. средства</title>
+</head>
+<body>
+<h3>Выданные плав. средства</h3>
+<div>
+    <table class="table-bordered">
+        <thead>
+        @foreach (var header in Model.Contracts.Headers)
+        {
+            <th>@header</th>
+        }
+        </thead>
+        <tbody>
+        @foreach (var row in Model.Contracts.Values)
+        {
+            <tr>
+                @foreach (var value in row)
+                {
+                    <td>@value</td>
+                }
+                <td>
+                    <form method="post" class="form-group">
+                        <input type="hidden" name="inventoryNumber" value="@row[Model.Contracts.Headers.IndexOf("Инвентарный_№")]"/>
+                        <button type="submit" id="btn-delete">Завершить</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

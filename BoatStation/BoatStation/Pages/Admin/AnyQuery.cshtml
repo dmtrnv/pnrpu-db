@@ -1,0 +1,54 @@
+﻿@page
+@model BoatStation.Pages.Admin.AnyQuery
+
+@{
+    Layout = "Shared/_Layout";
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <title>Выполнить запрос</title>
+</head>
+<body>
+<div>
+    <form method="post" class="form-group">
+        <label for="queryInput">Введите запрос</label><br/>
+        <textarea asp-for="Query" style="width: 500px; height: 400px;" id="queryInput"></textarea><br/>
+        <button type="submit" >Отправить</button>
+    </form>
+</div>
+<div>
+    <br/> <br/> <br/>
+    
+    @if (Model.OtherQueryResult != string.Empty)
+    {
+        <p>@Model.OtherQueryResult</p>
+    }
+    
+    @if (Model.SelectResult.Headers.Count != 0)
+    {
+        <table class="table-bordered">
+            <thead>
+            @foreach (var header in Model.SelectResult.Headers)
+            {
+                <th>@header</th>
+            }
+            </thead>
+            <tbody>
+            @foreach (var row in Model.SelectResult.Values)
+            {
+                <tr> 
+                    @foreach (var value in row)
+                    {
+                        <td>@value</td>
+                    }
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+</div>
+</body>
+</html>

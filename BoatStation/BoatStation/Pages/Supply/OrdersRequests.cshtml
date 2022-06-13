@@ -1,0 +1,44 @@
+﻿@page
+@model BoatStation.Pages.Supply.OrdersRequests
+
+@{
+    Layout = "Shared/_Layout";
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <title>Заявки на заказ</title>
+</head>
+<body>
+<h3>Плав. средства, срок эксплуатации которых заканчивается менее чем через полгода</h3>
+<div>
+    <table class="table-bordered">
+        <thead>
+        @foreach (var header in Model.WatercraftRequestsToOrder.Headers)
+        {
+            <th>@header</th>
+        }
+        </thead>
+        <tbody>
+        @foreach (var row in Model.WatercraftRequestsToOrder.Values)
+        {
+            <tr>
+                @foreach (var value in row)
+                {
+                    <td>@value</td>
+                }
+                <td>
+                    <form method="post" class="form-group">
+                        <input type="hidden" name="inventoryNumber" value="@row.Last()"/>
+                        <button type="submit" id="btn-order">Заказать</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

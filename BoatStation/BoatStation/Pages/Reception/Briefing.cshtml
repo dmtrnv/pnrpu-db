@@ -1,0 +1,36 @@
+﻿@page
+@model BoatStation.Pages.Reception.Briefing
+
+@{
+    Layout = "Shared/_Layout";
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <title>Проведенеи инструктажа</title>
+</head>
+<body>
+<h3>Интсруктаж</h3>
+<div>
+    <form method="post" class="form-group">
+        <p>Тип инструктажа</p>
+        @for (var i = 0; i < Model.BriefingTypes.Count; i++)
+        {
+            <input type="radio" asp-for="@Model.SelectedBriefingType" id="typeBr{@i}" value="@Model.BriefingTypes[i]"/>
+            <label for="typeBr{@i}">@Model.BriefingTypes[i]</label><br/>
+        }
+        <p>Инструктор</p>  
+        @for (var i = 0; i < Model.Instructors.Count; i++)
+        {
+            <input type="radio" asp-for="@Model.SelectedInstructor" id="typeIr{@i}" value="@Model.Instructors[i]"/>
+            <label for="typeIr{@i}">@Model.Instructors[i]</label><br/>
+        }
+        <input type="hidden" name="clientId" value="@Model.ClientId"/>
+        <input type="hidden" name="watercraftId" value="@Model.WatercraftId"/>
+        <input type="submit" asp-page-handler="MakeBriefing" value="Провести инструктаж"/>
+    </form>
+</div>
+</body>
+</html>

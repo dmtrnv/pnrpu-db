@@ -1,0 +1,38 @@
+﻿@page
+@model BoatStation.Pages.Supply.Orders
+
+@{
+    Layout = "Shared/_Layout";
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <title>Заказы на приобретение</title>
+</head>
+<body>
+<h3>Созданные заказы</h3>
+<div>
+    <table class="table-bordered">
+        <thead>
+        @foreach (var header in Model.WatercraftOrders.Headers)
+        {
+            <th>@header</th>
+        }
+        </thead>
+        <tbody>
+        @foreach (var row in Model.WatercraftOrders.Values)
+        {
+            <tr>
+                @foreach (var value in row)
+                {
+                    <td>@value</td>
+                }
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

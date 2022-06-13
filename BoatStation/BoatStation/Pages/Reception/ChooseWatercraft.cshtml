@@ -1,0 +1,45 @@
+﻿@page
+@model BoatStation.Pages.Reception.ChooseWatercraft
+
+@{
+    Layout = "Shared/_Layout";
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <title>Выбор плав. средства</title>
+</head>
+<body>
+<h3>Выбрать плав. средство</h3>
+<div>
+    <table class="table-bordered">
+        <thead>
+        @foreach (var header in Model.AvailableWatercrafts.Headers.Skip(1))
+        {
+            <th>@header</th>
+        }
+        </thead>
+        <tbody>
+        @foreach (var row in Model.AvailableWatercrafts.Values)
+        {
+            <tr>
+                @foreach (var value in row.Skip(1))
+                {
+                    <td>@value</td>
+                }
+                <td>
+                    <form method="post" class="form-group">
+                        <input type="hidden" name="watercraftId" value="@row.First()"/>
+                        <input type="hidden" name="clientId" value="@Model.ClientId"/>
+                        <button type="submit" id="btn-order">Выбрать</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

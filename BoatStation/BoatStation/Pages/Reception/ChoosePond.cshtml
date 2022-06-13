@@ -1,0 +1,29 @@
+﻿@page
+@model BoatStation.Pages.Reception.ChoosePond
+
+@{
+    Layout = "Shared/_Layout";
+    var pondTypes = Model.AvailablePonds.Values.SelectMany(p => p).ToList();
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <title>Выбор водоема</title>
+</head>
+<body>
+<div>
+    <h3>Выбрать водоем</h3>
+    <form method="post" class="form-group">
+        @for (var i = 0; i < pondTypes.Count; i++)
+        {
+            <input type="radio" asp-for="@Model.SelectedPond" id="type{@i}" value="@pondTypes[i]"/>
+            <label for="type{@i}">@pondTypes[i]</label><br/>    
+        }
+        <input type="hidden" name="clientId" value="@Model.ClientId"/>
+        <input type="submit" asp-page-handler="SelectPond" value="Выбрать"/>
+    </form>
+</div>
+</body>
+</html>

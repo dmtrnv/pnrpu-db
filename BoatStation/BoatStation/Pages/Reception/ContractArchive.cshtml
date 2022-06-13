@@ -1,0 +1,38 @@
+﻿@page
+@model BoatStation.Pages.Reception.ContractArchive
+
+@{
+    Layout = "Shared/_Layout";
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <title>История выдачи плав. средств</title>
+</head>
+<body>
+<h3>История выдачи плав. средств</h3>
+<div>
+    <table class="table-bordered">
+        <thead>
+        @foreach (var header in Model.Contracts.Headers)
+        {
+            <th>@header</th>
+        }
+        </thead>
+        <tbody>
+        @foreach (var row in Model.Contracts.Values)
+        {
+            <tr>
+                @foreach (var value in row)
+                {
+                    <td>@value</td>
+                }
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

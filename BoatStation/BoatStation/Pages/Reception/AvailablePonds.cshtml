@@ -1,0 +1,38 @@
+﻿@page
+@model BoatStation.Pages.Reception.AvailablePonds
+
+@{
+    Layout = "Shared/_Layout";
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <title>База водоемов</title>
+</head>
+<body>
+<h3>Имеющиеся водоемы</h3>
+<div>
+    <table class="table-bordered">
+        <thead>
+        @foreach (var header in Model.Ponds.Headers)
+        {
+            <th>@header</th>
+        }
+        </thead>
+        <tbody>
+        @foreach (var row in Model.Ponds.Values)
+        {
+            <tr>
+                @foreach (var value in row)
+                {
+                    <td>@value</td>
+                }
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

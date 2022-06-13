@@ -1,0 +1,25 @@
+﻿@page
+@model BoatStation.Pages.ChangeUser
+
+@{
+    Layout = "Shared/_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Сменить пользователя</title>
+</head>
+<body>
+<div>
+    <form method="post" class="form-group">
+        <label for="Username">Имя пользователя</label>
+        <input type="string" asp-for="Username" id="username" class="form-control w-25"/>
+        <label for="Password">Пароль</label>
+        <input type="string" asp-for="Password" id="password" class="form-control w-25"/>
+        <button type="submit" >Войти</button>
+    </form>
+</div>
+</body>
+</html>

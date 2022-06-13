@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Npgsql" Version="7.0.0-preview.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Pages\Repair\RepairRequests.cshtml.cs">
+        <DependentUpon>Repair.cshtml</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+</Project>

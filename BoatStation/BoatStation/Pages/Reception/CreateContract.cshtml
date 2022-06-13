@@ -1,0 +1,57 @@
+﻿@page
+@model BoatStation.Pages.Reception.CreateContract
+
+@{
+    Layout = "Shared/_Layout";
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <title>Выдать плав. средство</title>
+</head>
+<body>
+<div>
+    <h3>Добавить клиента</h3>
+    <form method="post" class="form-group">
+        <label for="name">Имя</label>
+        <input type="text" asp-for="Client.Name" id="name" class="form-control w-25"/>
+        <label for="surname">Фамилия</label>
+        <input type="text" asp-for="Client.Surname" id="surname" class="form-control w-25"/>
+        <label for="patronymic">Отчество</label>
+        <input type="text" asp-for="Client.Patronymic" id="patronymic" class="form-control w-25"/>
+        <p><b>Паспортные данные</b></p>
+        <label for="sernum">Серия</label>
+        <input type="text" asp-for="Client.SerialNumber" id="sernum" class="form-control w-25"/>
+        <label for="num">Номер</label>
+        <input type="text" asp-for="Client.Number" id="num" class="form-control w-25"/>
+        <label for="isby">Кем выдан</label>
+        <input type="text" asp-for="Client.IssuedBy" id="isby" class="form-control w-25"/>
+        <label for="isdt">Дата выдачи (ГГГГ-ММ-ДД)</label>
+        <input type="text" asp-for="Client.IssuedDate" id="isdt" class="form-control w-25"/>
+        <label for="divc">Код подразделения (104-306)</label>
+        <input type="text" asp-for="Client.DivisionCode" id="divc" class="form-control w-25"/>
+        <label for="bdt">Дата рождения (ГГГГ-ММ-ДД)</label>
+        <input type="text" asp-for="Client.BirthdayDate" id="bdt" class="form-control w-25"/>
+        <p>Пол</p>
+        <input type="radio" asp-for="Client.Gender" id="genM" value="М"/>
+        <label for="genM">Мужской</label>
+        <input type="radio" asp-for="Client.Gender" id="genW" value="Ж"/>
+        <label for="genW">Женский</label><br/>
+        <p><b>Место проживания</b></p>
+        <label for="reg">Регион</label>
+        <input type="text" asp-for="Client.Region" id="reg" class="form-control w-25"/>
+        <label for="city">Город</label>
+        <input type="text" asp-for="Client.City" id="city" class="form-control w-25"/>
+        <label for="strt">Улица</label>
+        <input type="text" asp-for="Client.Street" id="strt" class="form-control w-25"/>
+        <label for="hnum">Дом</label>
+        <input type="text" asp-for="Client.HouseNumber" id="hnum" class="form-control w-25"/>
+        <label for="anum">Квартира</label>
+        <input type="text" asp-for="Client.ApartmentNumber" id="anum" class="form-control w-25"/>
+        <input type="submit" asp-page-handler="CreateClient" value="Добавить"/>
+    </form>
+</div>
+</body>
+</html>
